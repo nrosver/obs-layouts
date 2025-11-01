@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, intial-scale=1.0">
+        
+        <title>Clock</title>
+        
+        <script src="https://cdn.tailwindcss.com"></script>
+        
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600,700&display=swap" rel="stylesheet">
+
+        <script>
+            tailwind.config = {
+                theme: { 
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        </script>
+        <style>
+            .strokeme {
+                color: white;
+                text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+            }
+        </style>
+    </head>
+    <body class="flex items-start justify-center h-screen">
+        <div class="text-center px-4 text-8xl flex gap-5 mt-5">
+            <h1 id="date" class="font-semibold strokeme"></h1>
+            <h1 id="time" class="font-bold strokeme"></h1>
+        </div>  
+    </body>
+    <script>
+        function updateClock() {
+            const now = new Date()
+
+            const options = { year: 'numeric', month: 'numeric', day: 'numeric' }
+            const dateString = now.toLocaleDateString(undefined, options);
+
+            const hours = String(now.getHours()).padStart(2, '0')
+            const minutes = String(now.getMinutes()).padStart(2, '0')
+            const seconds = String(now.getSeconds()).padStart(2, '0')
+
+            const timeString = `${hours}:${minutes}:${seconds}`
+
+            document.getElementById('date').textContent = dateString
+            document.getElementById('time').textContent = timeString
+        }
+
+        setInterval(updateClock, 1000)
+
+        updateClock()
+    </script>
+</html>
